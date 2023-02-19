@@ -33,6 +33,9 @@
             <div v-if="currentTodo">
                 <h4>To-Do</h4>
                 <div>
+                    <label><strong>Дата создания:</strong></label> {{ getData(currentTodo) }}
+                </div>
+                <div>
                     <label><strong>Заголовок:</strong></label> {{ currentTodo.title }}
                 </div>
                 <div>
@@ -70,6 +73,15 @@ export default {
         }
     },
     methods: {
+        getData(data) {
+            const Data = new Date(data.createdAt);
+            const Year = Data.getFullYear();
+            const Month = Data.getMonth();
+            const Day = Data.getDate();
+            const Hour = Data.getHours();
+            const Minutes = Data.getMinutes();
+            return Year+'.'+Month+'.'+Day+' '+Hour+'.'+Minutes;
+        },
         retrieveTodos() {
             DataService.getAll()
             .then(response => {
